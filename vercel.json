@@ -1,0 +1,20 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "regions": ["syd1"],
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": {
+      "type": "string",
+      "description": "The URL where your site will be hosted"
+    },
+    "DATABASE_URL": {
+      "type": "string",
+      "description": "PostgreSQL connection string",
+      "required": true
+    }
+  }
+}
+

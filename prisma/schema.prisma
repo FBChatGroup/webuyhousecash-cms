@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // Enable connection pooling for better performance in serverless environments
+  directUrl = env("DIRECT_URL")
+}
+
+model SeoSettings {
+  id                 String  @id @default(cuid())
+  siteName           String?
+  siteDescription    String?
+  googleAnalyticsId  String?
+  googleTagManagerId String?
+  facebookPixelId    String?
+  googleVerification String?
+  bingVerification   String?
+  defaultOgImage     String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model BusinessInfo {
+  id                String   @id @default(cuid())
+  businessName      String?
+  legalName         String?
+  description       String?
+  telephone         String?
+  email             String?
+  website           String?
+  streetAddress     String?
+  city              String?
+  state             String?
+  postalCode        String?
+  country           String?
+  latitude          Float?
+  longitude         Float?
+  priceRange        String?
+  logo              String?
+  image             String?
+  foundingDate      String?
+  openingHours      Json?    // Store as JSON array of day/hours objects
+  socialProfiles    Json?    // Store as JSON object with platform keys
+  paymentAccepted   String?
+  areaServed        String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model BusinessHours {
+  id        String   @id @default(cuid())
+  dayOfWeek String
+  opens     String?
+  closes    String?
+  isClosed  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BusinessLocation {
+  id            String   @id @default(cuid())
+  name          String
+  streetAddress String
+  city          String
+  state         String?
+  postalCode    String?
+  country       String?
+  phone         String?
+  email         String?
+  latitude      Float?
+  longitude     Float?
+  isPrimary     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String?
+  content   String
+  rating    Int      @default(5)
+  category  String?  // foreclosure, inherited, divorce, damage, etc.
+  featured  Boolean  @default(false)
+  image     String?
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
